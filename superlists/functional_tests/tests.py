@@ -33,7 +33,7 @@ class NewVisitorTest(LiveServerTestCase):
         time.sleep(10)
 
         edith_list_url=self.browser.current_url
-        self.assertRegex(edith_list_url,'/list/.+')
+        self.assertRegex(edith_list_url,'/lists/.+')
 
         table=self.browser.find_element_by_id('id_list_table')
         rows=table.find_elements_by_tag_name('tr')
@@ -52,7 +52,7 @@ class NewVisitorTest(LiveServerTestCase):
 
       #  self.fail('finish the test')
         self.browser.quit()
-        self.browser=self.Firefox()
+        self.browser=webdriver.Firefox()
 
 
         self.browser.get(self.live_server_url)
@@ -65,8 +65,11 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys('Buy milk')
         inputbox.send_keys(Keys.ENTER)
 
+
+        time.sleep(6)
         francis_list_url=self.browser.current_url
-        self.assertRegex(francis_list_url,'/list/.+')
+        self.assertRegex(francis_list_url,'/lists/.+')
+        self.assertNotEquals(francis_list_url,edith_list_url)
 
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock features', page_text)
