@@ -9,6 +9,10 @@ class NewVisitorTest(unittest.TestCase):
     def tearDown(self):
         pass
     #    self.browser.quit()
+    def check_for_row_in_list_table(self,row_text):
+        table=self.browser.find_element_by_id('id_list_table')
+        rows=self.browser.find_elements_by_tag_name('tr')
+        self.assertIn(row_text,[row.text for row in rows])
     def test_can_start_a_list_and_retrieve_it_later(self):
         self.browser.get('http://localhost:8000')
         self.assertIn('To-Do',self.browser.title)
@@ -23,10 +27,17 @@ class NewVisitorTest(unittest.TestCase):
 
         table=self.browser.find_element_by_id('id_list_table')
         rows=table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text =='1: Buy peacock features' for row in rows),"New to-do item did not appear in table --its text was :\n%s" %(table.text)
+        # self.assertTrue(
+        #     any(row.text =='1: Buy peacock features' for row in rows),"New to-do item did not appear in table --its text was :\n%s" %(table.text)
+        # )
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('use peacock feathers to make a fly')
+        inputbox.send_keys(Keys.ENTER)
 
-        )
+        self.check_for_row_in_list_table('1: Buy peacock features ')
+        self.check_for_row_in_list_table('2: use peacock feathers to make a fly')
+
+
       #  self.fail('finish the test')
 
 if __name__=="__main__":
