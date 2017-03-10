@@ -13,20 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url,include
+from django.conf.urls import url
 from django.contrib import admin
 from lists import views
 import lists
-from lists import urls as list_urls
-from django.conf.urls.static import static
 
-from superlists import settings
 
 urlpatterns = [
    # url(r'^admin/', admin.site.urls),
-    url(r'^$',views.home_page,name='home_page',),
-    # url(r'^lists/(\d+)/$',lists.views.view_list,name='view_list'),
-    # url(r'^lists/(\d+)/add_item$', lists.views.add_item, name='add_item'),
-    url(r'^lists/new$',lists.views.new_list,name='new_list'),
-    url(r'^lists/', include(list_urls)),
+  #   url(r'^$',views.home_page,name='home_page',),
+   #  url(r'^new$',views.new_list,name='new_list'),
+    url(r'^(\d+)/$',views.view_list,name='view_list'),
+    url(r'^(\d+)/add_item$', views.add_item, name='add_item'),
+
+ #   url(r'^/new$',lists.views.new_list,name='new_list'),
 ]
