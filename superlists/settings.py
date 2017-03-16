@@ -23,7 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-_o4i1+06yruadg&9mch1@8sj%s_10h8z&m29e5x(j#m=i*p#0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+#DEBUG = True
+ALLOWED_HOSTS=['www.xin912.cn']
 
 ALLOWED_HOSTS = []
 

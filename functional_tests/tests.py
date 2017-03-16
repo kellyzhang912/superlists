@@ -1,3 +1,4 @@
+from pyvirtualdisplay import Display
 from selenium import webdriver
 import unittest
 from selenium.webdriver.common.keys import Keys
@@ -25,6 +26,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
             super().tearDownClass()
 
     def setUp(self):
+        display =Display(visible=0,size=(800,600))
+        display.start()
         self.browser=webdriver.Firefox()
         self.browser.implicitly_wait(3)
     def tearDown(self):
